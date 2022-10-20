@@ -344,9 +344,8 @@ where MAMH = 'CTRR' and left(KQ.MAHV,3)='K12'
 order by TEN, HO
 
 --Bai tap 2, phan III, cau 3, trang 12
-select KQ.MAHV, HO + ' ' + TEN as HOTEN, MAMH
-from KETQUATHI KQ inner join HOCVIEN HV
-on HV.MAHV = KQ.MAHV
+select KQ.MAHV, HO + ' ' + TEN as HOTEN, TENMH
+from ((KETQUATHI KQ inner join HOCVIEN HV on HV.MAHV = KQ.MAHV) inner join MONHOC MH on KQ.MAMH = MH.MAMH)
 where LANTHI = 1 and KQUA = 'Dat'
 order by KQ.MAHV
 
@@ -361,3 +360,5 @@ select KQ.MAHV, HO + ' ' + TEN as HOTEN
 from KETQUATHI KQ inner join HOCVIEN HV
 on KQ.MAHV = HV.MAHV
 where left(KQ.MAHV, 1) = 'K' and MAMH = 'CTRR' and KQUA = 'Khong Dat' and LANTHI = 3
+
+
