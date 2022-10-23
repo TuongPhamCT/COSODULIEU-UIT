@@ -356,9 +356,18 @@ on KQ.MAHV = HV.MAHV
 where LEFT(KQ.MAHV,3) = 'K11' and MAMH = 'CTRR' and KQUA = 'Khong Dat' and LANTHI = 1
 
 --Bai tap 2, phan III, cau 5, trang 12
-select KQ.MAHV, HO + ' ' + TEN as HOTEN
-from KETQUATHI KQ inner join HOCVIEN HV
-on KQ.MAHV = HV.MAHV
-where left(KQ.MAHV, 1) = 'K' and MAMH = 'CTRR' and KQUA = 'Khong Dat' and LANTHI = 3
+select distinct MAHV, HOTEN
+from (
+	select KQ.MAHV, HO + ' ' + TEN as HOTEN
+	from KETQUATHI KQ inner join HOCVIEN HV
+	on KQ.MAHV = HV.MAHV
+	where left(KQ.MAHV, 1) = 'K' and MAMH = 'CTRR' and KQ.MAHV not in (
+		select distinct KQ.MAHV
+		from KETQUATHI KQ inner join HOCVIEN HV
+		on KQ.MAHV = HV.MAHV
+		where left(KQ.MAHV, 1) = 'K' and MAMH = 'CTRR' and KQUA = 'Dat'
+		group by KQ.MAHV
+	)
+) a
 
 
