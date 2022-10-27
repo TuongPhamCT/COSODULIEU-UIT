@@ -2,10 +2,11 @@ use QLGV
 
 --Bai tap 2, phan II, cau 1, trang 12
 update GIAOVIEN
-set HESO -= HESO * 0.2
+set HESO += 0.2
 where MAGV in (
 	select TRGKHOA from KHOA
 )
+
 
 --Bai tap 2, phan II, cau 2, trang 12
 update HOCVIEN set DIEMTB = DTBHV.DTB
